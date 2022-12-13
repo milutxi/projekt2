@@ -9,14 +9,14 @@ html {
 body {
     background-color: #BBC3C9;
     min-height: 100%;
-    margin-top: 30%;
+    margin-top: 200px;
 }
 
 .game {
-    background-color: #637074;
+    background-color: #9b6a6c;
     border: 5px solid #212227;
     border-radius: 30px;
-    padding: 80px;  
+    padding: 40px;  
 }
 
 h1 {

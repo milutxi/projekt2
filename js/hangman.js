@@ -1,36 +1,82 @@
-let wordsArray = ["chair", "table", "beach", "dream", "drive", "after", "admit", "earth", "image", "brown", "mouse", "house", "water", "drink"];
 
+const WORDSARRAY = ["cheer", "table", "beach", "green", "drive", "hello", "admit", "earth", "image", "brown", "mouse", "house", "water", "drink"];
 
-let word = wordsArray[ (Math.floor(Math.random() * wordsArray.length))];
+const WORD = WORDSARRAY[ (Math.floor(Math.random() * WORDSARRAY.length))];
 
-alert ("Hi!, Welcome to the hangman game. Enter one by one a letter to guess the 5 letters word in English");
+alert ("Hi!, Welcome to the hangman game. Enter one by one a letter to guess the 5 letters-word in English");
 
-let hiddenWord = "-----"
-let letter = prompt(
-    "This is the word you have to find " + hiddenWord + "\nEnter a letter \n"+ word);
-do{
-    
-    
-    if (word.indexOf(letter) === -1) {
-        letter = prompt ("The letter " + letter +" entered is not in the word, try again! " + hiddenWord + "\nEnter a new letter \n");
-    } else {
-        let i = word.indexOf(letter);
-        if(i === 0) {
-            hiddenWord = letter + hiddenWord.substring(1, hiddenWord.length);   // this is for the first letter to replace
-        }else if (i === hiddenWord.length-1) {                                    // this is for the last letter to replace
-            hiddenWord = hiddenWord.substring(0, hiddenWord.length-1) + letter;
-        }else {
-            hiddenWord = hiddenWord.substring(0, i)+ letter+hiddenWord.substring(i+1,hiddenWord.length);
-    
-        }
-    
-       
-        letter = prompt ("well done, continue. " + hiddenWord + "\n Enter a letter \n");
+let hiddenWord = "-----";
+let letter;
+let lettersEntered = [];    // new array for the letters entered, will add one by one in the game
+let message;
+let flag = false;   // boolean to aply to the letter entered is in the word or not
+
+for(let i = 10; i > 0; i--) {
+
+    if((flag === true) && (i != 10)){  // message if the letter is in the word
+        message = "Well done, continue!\nYou have " + i + " tries to guess the word!\nEnter a letter: \n "+ hiddenWord + "\nThe letters already entered are: [" + lettersEntered + " ]\n" + WORD;
+
+    }else if((flag === false) && (i != 10)){  // message if the letter in NOT in the word.
+        message = "That was wrong guess, continue!\nYou have " + i + " tries to guess the word!\nEnter a letter: \n "+ hiddenWord + "\nThe letters already entered are: [" + lettersEntered + " ]\n" + WORD;
+
+    }else{  // this will be the message to aply for first time in the game
+        message = "You have " + i + " tries to guess the word!\nEnter a letter: \n "+ hiddenWord + "\nThe letters already entered are: [" + lettersEntered + " ]\n" + WORD;
+
     }
-}while(hiddenWord != word);
 
-alert ("Congratulations the word is " + word);
+    letter = prompt(message);  // show the message and wait for input from the user
 
+      if (letter === null) {               // if press cancel the game will stop
+        break;
+        }
 
+    lettersEntered.push(letter);  // add letter into the array
 
-// check index for arrays, week 7 js functions part 2
+    let letterArray = [];    // 
+
+    if(WORD.indexOf(letter) != -1) {     // check if the letter is in the word
+        letterArray = findIndexes(letter, WORD);   // calling function that will return in the array of indexes
+        flag = true;
+    }
+    else {                      //the letter is not in the word
+        flag = false;
+        continue;
+    }
+
+    for(let j = 0; j < letterArray.length; j++){                     //replace the "-" with the entered letter
+        hiddenWord = replaceAt(hiddenWord,letterArray[j],letter);
+    }
+
+    if(hiddenWord === WORD) {
+        break;
+    }
+}
+
+if(hiddenWord === WORD){                                                        // final conditional if the whole word is guess or not.
+    alert("Well done! you guess it. \nThe word is: " + WORD);
+}
+else{
+    alert("You lost! Better luck next time.\nThe word was: " + WORD);
+}
+
+function findIndexes(l, w){  // l for letter and w for word, two variables that i do not want to mix with the above already write.
+
+    let arrayOfIndexes = [];
+
+    for(let i = 0; i < w.length; i++) {
+        if(l === w[i]){                     // if the letter is in the word will add its index in the array of indexes
+            arrayOfIndexes.push(i);
+        }
+    }
+    return arrayOfIndexes;
+}
+
+function replaceAt(hWord,index,letter){
+    if(index === 0) {
+        return  letter + hWord.substring(1, hWord.length);   // this is for the first letter to replace
+    }else if (index === hWord.length-1) {                                    // this is for the last letter to replace
+        return hWord.substring(0, hWord.length-1) + letter;
+    }else {
+        return hWord.substring(0, index) + letter+hWord.substring(index+1,hWord.length);   //this is for the middle letters to replace
+    } 
+}
