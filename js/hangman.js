@@ -14,13 +14,13 @@ let flag = false;   // boolean to aply to the letter entered is in the word or n
 for(let i = 10; i > 0; i--) {
 
     if((flag === true) && (i != 10)){  // message if the letter is in the word
-        message = "Well done, continue!\nYou have " + i + " tries to guess the word!\nEnter a letter: \n "+ hiddenWord + "\nThe letters already entered are: [" + lettersEntered + " ]\n" + WORD;
+        message = "Well done, continue!\nYou have " + i + " tries to guess the word!\nEnter a letter: \n "+ hiddenWord + "\nThe letters already entered are: [" + lettersEntered + " ]\n";
 
     }else if((flag === false) && (i != 10)){  // message if the letter in NOT in the word.
-        message = "That was wrong guess, continue!\nYou have " + i + " tries to guess the word!\nEnter a letter: \n "+ hiddenWord + "\nThe letters already entered are: [" + lettersEntered + " ]\n" + WORD;
+        message = "That was wrong guess, continue!\nYou have " + i + " tries to guess the word!\nEnter a letter: \n "+ hiddenWord + "\nThe letters already entered are: [" + lettersEntered + " ]\n";
 
     }else{  // this will be the message to aply for first time in the game
-        message = "You have " + i + " tries to guess the word!\nEnter a letter: \n "+ hiddenWord + "\nThe letters already entered are: [" + lettersEntered + " ]\n" + WORD;
+        message = "You have " + i + " tries to guess the word!\nEnter a letter: \n "+ hiddenWord + "\nThe letters already entered are: [" + lettersEntered + " ]\n";
 
     }
 
