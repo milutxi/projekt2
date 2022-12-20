@@ -10,8 +10,9 @@ let letter;
 let lettersEntered = [];    // new array for the letters entered, will add one by one in the game
 let message;
 let flag = false;   // boolean to aply to the letter entered is in the word or not
+let i = 10; 
 
-for(let i = 10; i > 0; i--) {
+while (i > 0) {
 
     if((flag === true) && (i != 10)){  // message if the letter is in the word
         message = "Well done, continue!\nYou have " + i + " tries to guess the word!\nEnter a letter: \n "+ hiddenWord + "\nThe letters already entered are: [" + lettersEntered + " ]\n";
@@ -40,6 +41,7 @@ for(let i = 10; i > 0; i--) {
     }
     else {                      //the letter is not in the word
         flag = false;
+        i--;
         continue;
     }
 
@@ -50,6 +52,7 @@ for(let i = 10; i > 0; i--) {
     if(hiddenWord === WORD) {
         break;
     }
+
 }
 
 if(hiddenWord === WORD){                                                        // final conditional if the whole word is guess or not.
