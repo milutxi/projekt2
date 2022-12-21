@@ -1,3 +1,7 @@
+Updated 21-12-2022.
+
+Fixed! VG!
+
 Hi Shiela! 
 
 Nice work, the code is good and the game works well.
